@@ -1,0 +1,324 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/wontaaail/S.T.Geometry/blob/master/2019.11.01%20%EC%97%B0%EC%8A%B5%20%EB%85%B8%ED%8A%B8%EB%B6%81(1)\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BlJW7VgsETk_",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 158
+        },
+        "outputId": "4c746bab-94b2-49fe-999e-27c27c1e3fb6"
+      },
+      "source": [
+        "pip install keras"
+      ],
+      "execution_count": 60,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Requirement already satisfied: keras in /usr/local/lib/python3.6/dist-packages (2.3.1)\n",
+            "Requirement already satisfied: keras-applications>=1.0.6 in /usr/local/lib/python3.6/dist-packages (from keras) (1.0.8)\n",
+            "Requirement already satisfied: keras-preprocessing>=1.0.5 in /usr/local/lib/python3.6/dist-packages (from keras) (1.1.0)\n",
+            "Requirement already satisfied: h5py in /usr/local/lib/python3.6/dist-packages (from keras) (2.8.0)\n",
+            "Requirement already satisfied: six>=1.9.0 in /usr/local/lib/python3.6/dist-packages (from keras) (1.12.0)\n",
+            "Requirement already satisfied: numpy>=1.9.1 in /usr/local/lib/python3.6/dist-packages (from keras) (1.17.3)\n",
+            "Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages (from keras) (3.13)\n",
+            "Requirement already satisfied: scipy>=0.14 in /usr/local/lib/python3.6/dist-packages (from keras) (1.3.1)\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Kh_Q_tBDEcQH",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 158
+        },
+        "outputId": "3b8d3e36-ed67-475f-beff-cef60ac3d785"
+      },
+      "source": [
+        "pip install --upgrade keras"
+      ],
+      "execution_count": 61,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Requirement already up-to-date: keras in /usr/local/lib/python3.6/dist-packages (2.3.1)\n",
+            "Requirement already satisfied, skipping upgrade: scipy>=0.14 in /usr/local/lib/python3.6/dist-packages (from keras) (1.3.1)\n",
+            "Requirement already satisfied, skipping upgrade: pyyaml in /usr/local/lib/python3.6/dist-packages (from keras) (3.13)\n",
+            "Requirement already satisfied, skipping upgrade: keras-preprocessing>=1.0.5 in /usr/local/lib/python3.6/dist-packages (from keras) (1.1.0)\n",
+            "Requirement already satisfied, skipping upgrade: keras-applications>=1.0.6 in /usr/local/lib/python3.6/dist-packages (from keras) (1.0.8)\n",
+            "Requirement already satisfied, skipping upgrade: numpy>=1.9.1 in /usr/local/lib/python3.6/dist-packages (from keras) (1.17.3)\n",
+            "Requirement already satisfied, skipping upgrade: six>=1.9.0 in /usr/local/lib/python3.6/dist-packages (from keras) (1.12.0)\n",
+            "Requirement already satisfied, skipping upgrade: h5py in /usr/local/lib/python3.6/dist-packages (from keras) (2.8.0)\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iDGXYHC0EflP",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "b3c46cbf-0a6f-4b74-da4a-ff31305912d1"
+      },
+      "source": [
+        "from google.colab import drive\n",
+        "\n",
+        "drive.mount('/content/gdrive')"
+      ],
+      "execution_count": 62,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Drive already mounted at /content/gdrive; to attempt to forcibly remount, call drive.mount(\"/content/gdrive\", force_remount=True).\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zhYrFpjKErv3",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 263
+        },
+        "outputId": "18b35bcb-fe8b-405c-c01c-8aa36f1898ad"
+      },
+      "source": [
+        "!ls '/content/gdrive/My Drive/Colab Notebooks/code/'"
+      ],
+      "execution_count": 63,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "0Readme.txt    15_3.py\t 20_7.py   9_3.py\n",
+            "0Readme_u.md   16_1.py\t 20_8.py   BostonHousing.csv\n",
+            "0Readme_u.pdf  16_3.py\t 20_9.py   diabetes.csv\n",
+            "10_13.py       16_5.py\t 21_11.py  housing.csv\n",
+            "10.2.py        17_4.py\t 21_1.py   ionosphere.csv\n",
+            "11_14.py       17_6.py\t 21_9.py   iris.csv\n",
+            "11.2.py        19_10.py  22_10.py  mnist.npz\n",
+            "12_9.py        19_18.py  22_19.py  pima-indians-diabetes.csv\n",
+            "13_2_base.py   19_1.py\t 22_25.py  sonar.csv\n",
+            "13_2_load.py   19_20.py  24_2.py   Untitled0.ipynb\n",
+            "13_2.py        20_10.py  7_9.py    Untitled1.ipynb\n",
+            "14_1,4.py      20_11.py  8_3.py\n",
+            "14_1.py        20_5.py\t 8_5.py\n",
+            "14_7.py        20_6.py\t 9_1.py\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "gOBq8pnuEtY1",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "import numpy\n",
+        "import pandas\n",
+        "from keras.models import Sequential\n",
+        "from keras.layers import Dense\n",
+        "from keras.wrappers.scikit_learn import KerasRegressor\n",
+        "from sklearn.model_selection import cross_val_score\n",
+        "from sklearn.model_selection import KFold\n",
+        "from sklearn.preprocessing import StandardScaler\n",
+        "from sklearn.pipeline import Pipeline"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "rNUfHAIgI4aD",
+        "colab_type": "text"
+      },
+      "source": [
+        "KerasRegressor := Scikit-Learn의 회귀 인터페이스\n",
+        "\n",
+        "sklearn := 사이킷런\n",
+        "\n",
+        "cross_val_score := 교차검증을 반복하는 코드\n",
+        "\n",
+        "KFold := K-폴드 교차검증\n",
+        "\n",
+        "StandardScaler(X) := 평균이 0과 표준편차가 1이 되도록 변환\n",
+        "\n",
+        "Pipeline := 여러 변환 단계를 정확한 순서대로 실행할 수 있도록 하는 것"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nUVGXPR8E2dW",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "dataframe = pandas.read_csv(\"/content/gdrive/My Drive/Colab Notebooks/code/housing.csv\", delim_whitespace=True, header=None)\n",
+        "dataset = dataframe.values"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vwTiulMuNpVS",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "X = dataset[:, 0:13]\n",
+        "Y = dataset[:, 13]"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OUUcM8hKNrqY",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def baseline_model():\n",
+        "  model = Sequential()\n",
+        "  model.add(Dense(13, input_dim=13, init= 'normal' , activation= 'relu' ))\n",
+        "  model.add(Dense(1, init='normal' ))\n",
+        "  model.compile(loss= 'mean_squared_error', optimizer= 'adam' )\n",
+        "  return model"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Qn5qXqNcOPnh",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "seed = 8\n",
+        "numpy.random.seed(seed)"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "idOoxigJOsAp",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "estimator = KerasRegressor(build_fn=baseline_model, nb_epoch=100, batch_size=5, verbose=0)"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hpw0CHDjPhyw",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 107
+        },
+        "outputId": "946edd15-867b-4f0c-ad4a-d6a3459111d7"
+      },
+      "source": [
+        "kfold = KFold(n_splits=10, random_state=seed)\n",
+        "results = cross_val_score(estimator, X, Y, cv=kfold)"
+      ],
+      "execution_count": 70,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "/usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:3: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(13, input_dim=13, activation=\"relu\", kernel_initializer=\"normal\")`\n",
+            "  This is separate from the ipykernel package so we can avoid doing imports until\n",
+            "/usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:4: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(1, kernel_initializer=\"normal\")`\n",
+            "  after removing the cwd from sys.path.\n"
+          ],
+          "name": "stderr"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ek-suzHUPqu8",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "e8299eef-6302-4aab-bd69-9fceef39fe9e"
+      },
+      "source": [
+        "print(\"Standardized: %.2f (%.2f) MSE\" % (results.mean(), results.std()))"
+      ],
+      "execution_count": 71,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Standardized: -152.92 (138.12) MSE\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
